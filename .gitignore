@@ -1,6 +1,6 @@
 node_modules
-!build/.gitkeep
 build/*
+!build/.gitkeep
 
 .DS_Store
 thumbs.db
