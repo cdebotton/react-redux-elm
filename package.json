@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prebuild": "npm run clean",
+    "build": "npm-run-all build:app build:resources",
     "clean": "del build/*",
-    "build:app": "babel src/app --out-dir build/app",
-    "build:resources": "webpack",
+    "build:app": "NODE_ENV=production babel src/app --out-dir build/app",
+    "build:resources": "NODE_ENV=production webpack",
     "predev": "npm run clean",
     "dev": "NODE_ENV=development nodemon --watch src/app -e js,pug --exec babel-node src/app",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -35,7 +37,7 @@
     "babel-core": "6.14.0",
     "babel-loader": "6.2.5",
     "babel-plugin-transform-runtime": "6.15.0",
-    "babel-preset-es2015": "6.14.0",
+    "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-0": "6.5.0",
     "babel-runtime": "6.11.6",
@@ -50,7 +52,9 @@
     "koa-webpack-hot-middleware": "1.0.3",
     "nodemon": "1.10.2",
     "npm-run-all": "3.1.0",
+    "postcss-cssnext": "2.7.0",
     "postcss-loader": "0.11.1",
+    "postcss-normalize": "0.3.0",
     "react-hot-loader": "3.0.0-beta.2",
     "style-loader": "0.13.1",
     "webpack": "2.1.0-beta.21"

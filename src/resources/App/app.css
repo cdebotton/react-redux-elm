@@ -1,0 +1,47 @@
+html {
+  font-size: 62.5%;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin :0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: #eee;
+  padding: 2rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+  flex: 1 0 100%;
+}
+
+.counter {
+  flex: 1 0 100%;
+}
+
+.button {
+  cursor: pointer;
+  flex: 1 1 50%;
+  border: none;
+  background-color: white;
+  padding: 2rem;
+}

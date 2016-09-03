@@ -41,6 +41,13 @@ export default env => {
     loaders: ['babel'],
   });
 
+  if (__DEV__) {
+    config.module.loaders.push({
+      test: /\.css$/,
+      loaders: ['style', 'css?modules', 'postcss?sourceMap=inline'],
+    });
+  }
+
   config.plugins = [];
 
   if (__DEV__) {
@@ -52,10 +59,18 @@ export default env => {
   } else {
     config.plugins = [
       new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurrenceOrderPlugin(),
       ...config.plugins,
+      new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false,
+      }),
     ];
   }
+
+  config.postcss = () => [
+    require('postcss-normalize'),
+    require('postcss-cssnext'),
+  ];
 
   return config;
 };
