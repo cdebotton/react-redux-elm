@@ -1,5 +1,6 @@
 import React from 'react';
 import { view } from 'redux-elm';
+
 import styles from './styles.css';
 
 export default view(({ model, dispatch }) => {
