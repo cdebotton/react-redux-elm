@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import path from 'path';
 
 export default env => {
@@ -46,6 +47,14 @@ export default env => {
       test: /\.css$/,
       loaders: ['style', 'css?modules', 'postcss?sourceMap=inline'],
     });
+  } else {
+    config.module.loaders.push({
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract({
+        fallbackLoader: 'style',
+        loader: 'css?modules!postcss',
+      }),
+    });
   }
 
   config.plugins = [];
@@ -59,6 +68,14 @@ export default env => {
   } else {
     config.plugins = [
       new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        minimize: true,
+        debug: false,
+        output: {
+          comments: false,
+        },
+      }),
+      new ExtractTextPlugin('[name].css'),
       ...config.plugins,
       new webpack.LoaderOptionsPlugin({
         minimize: true,
