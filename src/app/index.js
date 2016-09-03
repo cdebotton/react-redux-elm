@@ -2,10 +2,14 @@ import Koa from 'koa';
 import convert from 'koa-convert';
 import compress from 'koa-compress';
 import Pug from 'koa-pug';
+import Router from 'koa-router';
 import path from 'path';
+import Boom from 'boom';
+import bodyParser from 'koa-bodyparser';
 
 const ENV = (process.env.NODE_ENV || '').trim();
 const app = new Koa();
+const router = new Router();
 
 const pug = new Pug({
   viewPath: path.join(__dirname, 'views'),
@@ -14,6 +18,7 @@ const pug = new Pug({
 pug.use(app);
 
 app.use(convert(compress()));
+app.use(convert(bodyParser()));
 
 if (ENV === 'development') {
   const webpack = require('webpack');
@@ -41,9 +46,23 @@ app.use(async (ctx, next) => {
     }
 });
 
-app.use(ctx => {
+router.get('/', async (ctx, next) => {
   ctx.render('index');
 });
+
+router.get('/api/test', ctx => {
+  ctx.body = {
+    items: Array.from({ length: ctx.request.query.count })
+      .map(() => Math.random()),
+  };
+});
+
+app.use(router.routes());
+app.use(router.allowedMethods({
+  throw: true,
+  notImplemented: () => new Boom.notImplemented(),
+  methodNotAllowed: () => new Boom.methodNotAllowed(),
+}));
 
 app.listen(3000, () => {
   console.log('Application running on port 3000');
