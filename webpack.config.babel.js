@@ -3,12 +3,12 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import path from 'path';
 
 export default env => {
-  const __DEV__ = (env && env.development) || false;
+  const isDev = (env && env.development) || false;
   const config = {};
 
   const publicPath = '/dist/';
 
-  if (__DEV__) {
+  if (isDev) {
     config.devtool = 'eval-source-map';
   }
 
@@ -18,7 +18,7 @@ export default env => {
     ],
   };
 
-  if (__DEV__) {
+  if (isDev) {
     config.entry.bundle = [
       'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
       'webpack/hot/only-dev-server',
@@ -42,7 +42,7 @@ export default env => {
     loaders: ['babel'],
   });
 
-  if (__DEV__) {
+  if (isDev) {
     config.module.loaders.push({
       test: /\.css$/,
       loaders: ['style', 'css?modules', 'postcss?sourceMap=inline'],
@@ -59,7 +59,7 @@ export default env => {
 
   config.plugins = [];
 
-  if (__DEV__) {
+  if (isDev) {
     config.plugins = [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin(),

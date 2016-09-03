@@ -4,8 +4,13 @@ import compress from 'koa-compress';
 import Pug from 'koa-pug';
 import Router from 'koa-router';
 import path from 'path';
-import Boom from 'boom';
+import {
+  notImplemented as NotImplemented,
+  methodNotAllowed as MethodNotAllowed,
+} from 'boom';
 import bodyParser from 'koa-bodyparser';
+
+const debug = require('debug')('cmyk');
 
 const ENV = (process.env.NODE_ENV || '').trim();
 const app = new Koa();
@@ -23,6 +28,7 @@ app.use(convert(bodyParser()));
 if (ENV === 'development') {
   const webpack = require('webpack');
   const config = require('../../webpack.config.babel').default;
+
   const options = config({ development: true });
   const devMiddleware = require('koa-webpack-dev-middleware');
 
@@ -35,18 +41,19 @@ if (ENV === 'development') {
   })));
 
   const hotMiddleware = require('koa-webpack-hot-middleware');
+
   app.use(convert(hotMiddleware(compiler)));
 }
 
 app.use(async (ctx, next) => {
-    try {
-      await next();
-    } catch (err) {
-      console.log(err);
-    }
+  try {
+    await next();
+  } catch (err) {
+    debug(err);
+  }
 });
 
-router.get('/', async (ctx, next) => {
+router.get('/', async ctx => {
   ctx.render('index');
 });
 
@@ -60,10 +67,10 @@ router.get('/api/test', ctx => {
 app.use(router.routes());
 app.use(router.allowedMethods({
   throw: true,
-  notImplemented: () => new Boom.notImplemented(),
-  methodNotAllowed: () => new Boom.methodNotAllowed(),
+  notImplemented: () => new NotImplemented(),
+  methodNotAllowed: () => new MethodNotAllowed(),
 }));
 
 app.listen(3000, () => {
-  console.log('Application running on port 3000');
+  debug('Application running on port 3000');
 });
