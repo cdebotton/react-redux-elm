@@ -6,6 +6,7 @@ import { AppContainer } from 'react-hot-loader';
 import reduxElm from 'redux-elm';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 import routerMiddleware from './utils/routerMiddleware';
 
 export default (containerDomId) => {
@@ -22,6 +23,7 @@ export default (containerDomId) => {
     const reducers = combineReducers({
       root: updater,
       routing: routerReducer,
+      form: formReducer,
     });
 
     if (!store) {

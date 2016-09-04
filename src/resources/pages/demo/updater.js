@@ -7,11 +7,6 @@ import { Map } from 'immutable';
 
 import * as Effects from './effects';
 
-type Model = {
-  items: number[];
-  count: number;
-};
-
 type GetCount = (model: Map) => number;
 const getCount: GetCount = model => model.get('count');
 

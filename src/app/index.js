@@ -53,15 +53,15 @@ app.use(async (ctx, next) => {
   }
 });
 
-router.get('/', async ctx => {
-  ctx.render('index');
-});
-
 router.get('/api/test', ctx => {
   ctx.body = {
     items: Array.from({ length: ctx.request.query.count })
       .map(() => Math.random()),
   };
+});
+
+router.get('*', async ctx => {
+  ctx.render('index');
 });
 
 app.use(router.routes());
