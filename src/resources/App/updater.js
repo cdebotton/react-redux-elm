@@ -1,3 +1,5 @@
+/* @flow */
+
 import { Updater } from 'redux-elm';
 import { takeLatest } from 'redux-saga';
 import { call, put, select, fork } from 'redux-saga/effects';
@@ -5,7 +7,8 @@ import { Map } from 'immutable';
 
 import * as Effects from './effects';
 
-const getCount = model => model.get('count');
+type GetCount = (model: Map) => number;
+const getCount: GetCount = model => model.get('count');
 
 function* fetchItems() {
   const count = yield select(getCount);
@@ -28,7 +31,8 @@ function* saga() {
   yield fork(watchDecrease);
 }
 
-const init = value => new Map({
+type Init = (value: number) => Map;
+const init: Init = value => new Map({
   items: [],
   count: value,
 });

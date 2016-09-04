@@ -1,0 +1,11 @@
+[ignore]
+.*/fbjs/.*
+
+[include]
+
+[libs]
+
+[options]
+module.name_mapper='.*\(.css\)' -> 'empty/object'
+module.system=haste
+strip_root=true

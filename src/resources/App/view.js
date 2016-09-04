@@ -1,9 +1,13 @@
+/* @flow */
+
 import React from 'react';
 import { view } from 'redux-elm';
 
+import type { Element as ReactElement } from 'react';
+
 import styles from './styles.css';
 
-export default view(({ model, dispatch }) => {
+export default view(({ model, dispatch }): ReactElement => {
   const increase = () => dispatch({ type: 'Increase' });
   const decrease = () => dispatch({ type: 'Decrease' });
 
