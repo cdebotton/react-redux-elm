@@ -7,6 +7,11 @@ import { Map } from 'immutable';
 
 import * as Effects from './effects';
 
+type Model = {
+  items: number[];
+  count: number;
+};
+
 type GetCount = (model: Map) => number;
 const getCount: GetCount = model => model.get('count');
 
@@ -32,7 +37,7 @@ function* saga() {
 }
 
 type Init = (value: number) => Map;
-const init: Init = value => new Map({
+export const init: Init = value => new Map({
   items: [],
   count: value,
 });
