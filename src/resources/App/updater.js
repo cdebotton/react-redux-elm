@@ -1,10 +1,11 @@
 import { Updater } from 'redux-elm';
 import { takeLatest } from 'redux-saga';
 import { call, put, select, fork } from 'redux-saga/effects';
+import { Map } from 'immutable';
 
 import * as Effects from './effects';
 
-const getCount = model => model.count;
+const getCount = model => model.get('count');
 
 function* fetchItems() {
   const count = yield select(getCount);
@@ -27,13 +28,13 @@ function* saga() {
   yield fork(watchDecrease);
 }
 
-const init = value => ({
+const init = value => new Map({
   items: [],
   count: value,
 });
 
 export default new Updater(init(0), saga)
-  .case('Increase', model => ({ ...model, count: model.count + 1 }))
-  .case('Decrease', model => ({ ...model, count: model.count - 1 }))
-  .case('NewItems', (model, { items }) => ({ ...model, items }))
+  .case('Increase', model => model.update('count', count => count + 1))
+  .case('Decrease', model => model.update('count', count => count - 1))
+  .case('NewItems', (model, { items }) => model.set('items', items))
   .toReducer();

@@ -22,9 +22,9 @@ export default view(({ model, dispatch }) => {
       >
         -
       </button>
-      <span className={styles.counter}>Count: {model.count}</span>
+      <span className={styles.counter}>Count: {model.get('count')}</span>
       <ul>
-        {model.items.map(item => (
+        {model.get('items').map(item => (
           <li key={item}>{item}</li>
         ))}
       </ul>
