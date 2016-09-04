@@ -14,6 +14,12 @@ h6 {
   padding: 0;
 }
 
+h2 {
+  font-size: 2.827rem;
+  font-weight: lighter;
+  margin: 0 0 1.414rem 0;
+}
+
 *,
 *::before,
 *::after {
@@ -68,6 +74,10 @@ body {
   text-decoration: none;
 }
 
+.navListItem a+a {
+  margin-left: 2rem;
+}
+
 .navListItem .activeLink {
   font-weight: bold;
 }
@@ -75,6 +85,5 @@ body {
 .content {
   width: 100vw;
   flex: 1 1 100%;
-  background-color: red;
   padding: 2rem 4rem;
 }

@@ -15,22 +15,29 @@ export default view(({ model, dispatch }): ReactElement => {
   const content = (
     <div className={styles.container}>
       <h2 className={styles.title}>Hello, World!</h2>
-      <button
-        className={styles.button}
-        onClick={increase}
-      >
-        +
-      </button>
-      <button
-        className={styles.button}
-        onClick={decrease}
-      >
-        -
-      </button>
+      <div className={styles.buttons}>
+        <button
+          className={styles.button}
+          onClick={increase}
+        >
+          +
+        </button>
+        <button
+          className={styles.button}
+          onClick={decrease}
+        >
+          -
+        </button>
+      </div>
       <span className={styles.counter}>Count: {model.get('count')}</span>
-      <ul>
+      <ul className={styles.list}>
         {model.get('items').map(item => (
-          <li key={item}>{item}</li>
+          <li
+            className={styles.listItem}
+            key={item}
+          >
+            {item}
+          </li>
         ))}
       </ul>
     </div>
