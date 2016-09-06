@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  padding: 1rem 4rem;
+  background-color: #222;
+  background-image: linear-gradient(45deg,
+                                    transparent 91%,
+                                    #444 91%,
+                                    #444 94%,
+                                    #666 94%,
+                                    #666 97%,
+                                    #888 97%,
+                                    #888 100%,
+                                    transparent 100%);
+}
+
+.logo {
+  margin: 0 4rem 0 0;
+  font-size: 2.827rem;
+  color: #eee;
+  letter-spacing: -2px;
+}
+
+.nav {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.navList {
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  list-style: none;
+}
+
+.navListItem {
+  text-transform: lowercase;
+  font-size: 1.414rem;
+}
+
+.navListItem a {
+  text-decoration: none;
+  color: #eee;
+}
+
+.navListItem a+a {
+  margin-left: 2rem;
+}
+
+.navListItem .activeLink {
+  font-weight: bold;
+}

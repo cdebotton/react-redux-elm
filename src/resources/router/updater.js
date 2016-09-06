@@ -10,6 +10,8 @@ export const initialModel = () => new Map({
 });
 
 export default new Updater(initialModel())
-  .case('Demo', (model, action) => model.update('demo', demo => demoUpdater(demo, action)))
-  .case('Home', (model, action) => model.update('home', home => homeUpdater(home, action)))
+  .case('Demo', (model, action) =>
+    model.update('demo', demo => demoUpdater(demo, action)))
+  .case('Home', (model, action) =>
+    model.update('home', home => homeUpdater(home, action)))
   .toReducer();

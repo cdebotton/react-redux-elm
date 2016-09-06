@@ -6,8 +6,8 @@ import { Router, Route } from 'react-router';
 
 import connectView from '../utils/connectView';
 
-import Demo from '../views/demo/view';
-import Home from '../views/home/view';
+import Demo from '../pages/demo/view';
+import Home from '../pages/home/view';
 
 const routes = history => (
   <Router history={history}>
