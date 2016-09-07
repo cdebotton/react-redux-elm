@@ -11,11 +11,8 @@ const content = (
   </div>
 );
 
-export default view(() => {
-
-  return (
-    <Layout
-      content={content}
-    />
-  );
-});
+export default view(() => (
+  <Layout
+    content={content}
+  />
+));

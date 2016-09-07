@@ -3,12 +3,17 @@
 import React from 'react';
 import { view } from 'redux-elm';
 
-import type { Element as ReactElement } from 'react';
+import type { Element } from 'react';
 
 import Layout from '../../components/Layout';
 import styles from './styles.css';
 
-export default view(({ model, dispatch }): ReactElement => {
+type Props = {
+  dispatch: Function;
+  model: Map<string, any>;
+};
+
+export default view(({ model, dispatch }: Props): Element<any> => {
   const increase = () => dispatch({ type: 'Increase' });
   const decrease = () => dispatch({ type: 'Decrease' });
 

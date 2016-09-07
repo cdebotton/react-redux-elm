@@ -7,7 +7,7 @@ import { Map } from 'immutable';
 
 import * as Effects from './effects';
 
-type GetCount = (model: Map) => number;
+type GetCount = (model: Map<string, any>) => number;
 const getCount: GetCount = model => model.get('count');
 
 function* fetchItems() {
@@ -31,7 +31,7 @@ function* saga() {
   yield fork(watchDecrease);
 }
 
-type Init = (value: number) => Map;
+type Init = (value: number) => Map<string, any>;
 export const init: Init = value => new Map({
   items: [],
   count: value,

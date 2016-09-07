@@ -2,7 +2,13 @@
 
 import { CALL_HISTORY_METHOD } from 'react-router-redux';
 
-export default history => () => next => action => {
+type Action = {
+  [key: string]: any,
+};
+
+type Next = (action: Action) => ?Next;
+
+export default (history: Object) => () => (next: Next) => (action: Action) => {
   if (!action.type.endsWith(CALL_HISTORY_METHOD)) {
     return next(action);
   }

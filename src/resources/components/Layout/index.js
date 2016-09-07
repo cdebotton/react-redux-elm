@@ -2,22 +2,17 @@
 
 import React from 'react';
 import classNames from 'classnames';
+import type { Element } from 'react';
 
 import Header from '../Header';
-
-import type { Element as ReactElement } from 'react';
 
 import styles from './styles.css';
 
 type Props = {
-  content: ReactElement;
+  content: Element<any>;
 };
 
-type LayoutType = {
-  props: Props;
-};
-
-const Layout: LayoutType = ({ content }) => {
+export default ({ content }: Props): Element<any> => {
   const { className } = content.props;
   return (
     <div className={styles.container}>
@@ -28,5 +23,3 @@ const Layout: LayoutType = ({ content }) => {
     </div>
   );
 };
-
-export default Layout;
